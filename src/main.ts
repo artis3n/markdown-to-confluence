@@ -85,7 +85,7 @@ const convertedMarkdown = convert(content, {
     codeTheme: getInput("code_theme"),
   });
 
-  const confluence = new Confluence(confluenceUrl, auth, "TS");
+  const confluence = new Confluence(confluenceUrl, auth, spaceKey);
   const page: ConfluencePage = {
     title: "Markdown Test",
     body: markup,
@@ -125,9 +125,16 @@ const convertedMarkdown = convert(content, {
         );
       }
     } else {
-      error(
-        `${err.response.status} ${err.response.statusTest}: ${err.response?.data.reason} : ${err.response?.data.message}`
-      );
+      error(`${err.response.status} : ${err.response?.data.message}`);
+      if (
+        err.response?.data?.message.includes(
+          "Could not create content with type page"
+        )
+      ) {
+        error(
+          `Check your permissions to create content on Space key ${spaceKey}. Does this space exist on ${confluenceUrl} ?`
+        );
+      }
       setFailed(
         `Error occurred attempting to update Confluence on page: ${page.title}`
       );
