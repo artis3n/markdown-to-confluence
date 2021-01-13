@@ -16,6 +16,14 @@ The Action will use the README.md of the repository as the root page titled with
 The `source_dir` is a relative path inside the repository to the location of the Markdown files that you wish to render in Confluence.
 See below for more details and how to configure this action.
 
+See the output of this action from the [CI workflow](/.github/workflows/pr.yml) at <https://artis3nal.atlassian.net/wiki/spaces/GAT/>.
+
 # Usage
 
 You must minimally supply a `confluence_url`, `space_key`, `username`, and `password` to use this Action.
+
+:exclamation: To be filled in
+
+## Debug logging
+
+Follow GitHub's instructions for [step debug logging](https://docs.github.com/en/free-pro-team@latest/actions/managing-workflow-runs/enabling-debug-logging#enabling-step-debug-logging) to enable debug output in this action.
