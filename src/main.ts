@@ -13,12 +13,16 @@ import {
 import { StatusCodes } from "http-status-codes";
 
 const axios = require("axios").default;
+curlirize(axios, (result, err) => {
+  const { command } = result;
+  if (err) {
+    error(err);
+  } else {
+    debug(command);
+  }
+});
 
 async function main() {
-  if (getInput("debug_mode").toLowerCase() === "true") {
-    curlirize(axios);
-  }
-
   let confluenceUrl = getInput("confluence_url");
   if (confluenceUrl === "") {
     throw new Error(
@@ -121,6 +125,9 @@ const convertedMarkdown = convert(content, {
         );
       }
     } else {
+      error(
+        `${err.response.status} ${err.response.statusTest}: ${err.response?.data.reason} : ${err.response?.data.message}`
+      );
       setFailed(
         `Error occurred attempting to update Confluence on page: ${page.title}`
       );
