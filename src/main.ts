@@ -21,10 +21,9 @@ async function main() {
 
   let confluenceUrl = getInput("confluence_url");
   if (confluenceUrl === "") {
-    const errMsg =
-      "'confluence_url' input parameter is not defined. You must specify your Confluence host.";
-    error(errMsg);
-    throw new Error(errMsg);
+    throw new Error(
+      "'confluence_url' input parameter is not defined. You must specify your Confluence host."
+    );
   }
   // Remove trailing slash if present
   if (confluenceUrl.endsWith("/")) {
@@ -33,10 +32,9 @@ async function main() {
 
   const spaceKey = getInput("space_key");
   if (spaceKey === "") {
-    const errMsg =
-      "'space_key' input parameter is not defined. You must specify your Confluence Space Key.";
-    error(errMsg);
-    throw new Error(errMsg);
+    throw new Error(
+      "'space_key' input parameter is not defined. You must specify your Confluence Space Key."
+    );
   }
 
   const auth: ConfluenceAuth = {
@@ -44,10 +42,9 @@ async function main() {
     password: getInput("password"),
   };
   if (auth.username === "" || auth.password === "") {
-    const errMsg =
-      "'username' or 'password' input parameters are not defined. You must specify a Confluence user and a corresponding API token or password.";
-    error(errMsg);
-    throw new Error(errMsg);
+    throw new Error(
+      "'username' or 'password' input parameters are not defined. You must specify a Confluence user and a corresponding API token or password."
+    );
   }
 
   let baseUrl = getInput("base_url");
