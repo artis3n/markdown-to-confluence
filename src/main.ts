@@ -85,7 +85,7 @@ const convertedMarkdown = convert(content, {
     codeTheme: getInput("code_theme"),
   });
 
-  const confluence = new Confluence(confluenceUrl, auth, "TS");
+  const confluence = new Confluence(confluenceUrl, auth, spaceKey);
   const page: ConfluencePage = {
     title: "Markdown Test",
     body: markup,
