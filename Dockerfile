@@ -11,4 +11,4 @@ COPY --from=compiler dist ./
 
 RUN yarn install --production --frozen-lockfile
 
-ENTRYPOINT ["node", "main.js"]
+ENTRYPOINT ["node", "/main.js"]
