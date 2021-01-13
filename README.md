@@ -16,6 +16,6 @@ The Action will use the README.md of the repository as the root page titled with
 The `source_dir` is a relative path inside the repository to the location of the Markdown files that you wish to render in Confluence.
 See below for more details and how to configure this action.
 
-# Requirements
+# Usage
 
-You must supply a `confluence_url`, 
+You must minimally supply a `confluence_url`, `space_key`, `username`, and `password` to use this Action.
