@@ -1,7 +1,7 @@
 import { AxiosResponse } from "axios";
 import curlirize from "axios-curlirize";
 import { debug, error, getInput, info, setFailed } from "@actions/core";
-import github from "@actions/github";
+import { context as githubContext } from "@actions/github";
 import { convertToConfluenceWiki } from "./markdownProcessor";
 import { Confluence } from "./Confluence";
 import {
@@ -49,8 +49,6 @@ async function main() {
     error(errMsg);
     throw new Error(errMsg);
   }
-
-  const githubContext = github.context;
 
   let baseUrl = getInput("base_url");
   if (baseUrl === "") {
