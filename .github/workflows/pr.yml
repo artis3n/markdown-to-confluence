@@ -55,5 +55,3 @@ jobs:
           space_key: GAT  # Github Action Test
           username: ${{ secrets.CONFLUENCE_USER }}
           password: ${{ secrets.CONFLUENCE_APIKEY }}
-        env:
-          ACTIONS_STEP_DEBUG: true

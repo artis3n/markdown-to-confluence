@@ -40,8 +40,8 @@ async function main() {
   }
 
   const auth: ConfluenceAuth = {
-    username: getInput("username") || "admin",
-    password: getInput("password") || "admin",
+    username: getInput("username"),
+    password: getInput("password"),
   };
   if (auth.username === "" || auth.password === "") {
     const errMsg =
@@ -131,10 +131,6 @@ const convertedMarkdown = convert(content, {
   }
 }
 
-try {
-  main()
+main()
     .then(() => {})
     .catch((error) => setFailed(error));
-} catch (error) {
-  setFailed(error);
-}
