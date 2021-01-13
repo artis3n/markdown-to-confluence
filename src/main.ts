@@ -132,5 +132,5 @@ const convertedMarkdown = convert(content, {
 }
 
 main()
-    .then(() => {})
-    .catch((error) => setFailed(error));
+  .then(() => {})
+  .catch((error) => setFailed(error));
