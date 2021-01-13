@@ -28,28 +28,22 @@ export class Confluence {
   ): Promise<AxiosResponse<ConfluenceApiPostNewContentData>> {
     return axios({
       method: "post",
-      url: `${this.url}/rest/api/content`, // https://artis3nal.atlassian.net/wiki
+      url: `${this.url}/rest/api/content`,
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      /**
-             * {
-                username: 'dev@artis3nal.com',
-                password: 'TF2t2biDBePltwvwLvGp3591',
-            }
-             */
       auth: this.auth,
       data: {
         space: {
-          key: this.spaceKey, // 'AM'
+          key: this.spaceKey,
         },
-        title: content.title, // 'Markdown Test'
+        title: content.title,
         type: "page",
         status: "current",
         body: {
           wiki: {
-            value: content.body, // convertedMarkdown
+            value: content.body,
             representation: "wiki",
           },
         },
