@@ -1,6 +1,6 @@
 {
   "name": "markdown-to-confluence",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "GitHub Action to render a GitHub repository of Markdown content into a Confluence page and series of sub-pages.",
   "main": "dist/main.js",
   "repository": "https://github.com/artis3n/markdown-to-confluence",

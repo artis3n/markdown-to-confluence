@@ -30,7 +30,10 @@ inputs:
     description: The username with which to authenticate to Confluence.
     required: true
   password:
-    description: The API token or password with which to authenticate to Confluence.
+    description: |
+      The API token or password with which to authenticate to Confluence.
+
+      For Confluence Cloud, you can generate an API token at https://id.atlassian.com/manage/api-tokens.
     required: true
   base_url:
     description: |
@@ -48,16 +51,6 @@ inputs:
       Defaults to the repo root.
     required: false
     default: './'
-  debug_mode:
-    description: |
-      Enable debug mode, which prints out verbose information about the wiki conversion process.
-      Useful to debug connectivity issues between the GitHub Action and your Confluence instance.
-
-      Options: [true, false] (strings)
-
-      Default: false
-    required: false
-    default: 'false'
   code_theme:
     description: |
       What Confluence code theme to apply to code blocks. Must be a valid Confluence code block theme.
