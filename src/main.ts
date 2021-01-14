@@ -12,17 +12,7 @@ import {
 } from "./types/definitions";
 import { StatusCodes } from "http-status-codes";
 
-const axios = require("axios").default;
-curlirize(axios, (result, err) => {
-  const { command } = result;
-  if (err) {
-    error(err);
-  } else {
-    debug(command);
-  }
-});
-
-async function main() {
+const main = async () => {
   let confluenceUrl = getInput("confluence_url");
   if (confluenceUrl === "") {
     throw new Error(
@@ -141,6 +131,16 @@ const convertedMarkdown = convert(content, {
     }
   }
 }
+
+const axios = require("axios").default;
+curlirize(axios, (result, err) => {
+  const { command } = result;
+  if (err) {
+    error(err);
+  } else {
+    debug(command);
+  }
+});
 
 main()
   .then(() => {})
