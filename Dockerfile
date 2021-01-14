@@ -1,14 +1,15 @@
 FROM node:15-slim as compiler
 
 COPY / ./
-RUN yarn install --frozen-lockfile
-RUN yarn build \
-    && yarn test
+RUN yarn --frozen-lockfile --non-interactive install \
+    && yarn cache clean
+RUN yarn build
 
 FROM node:15-slim as app
 COPY package.json yarn.lock ./
 COPY --from=compiler dist ./
 
-RUN yarn install --production --frozen-lockfile
+RUN yarn --production --frozen-lockfile --non-interactive install \
+    && yarn cache clean
 
 ENTRYPOINT ["node", "/main.js"]
