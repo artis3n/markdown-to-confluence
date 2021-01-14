@@ -4,7 +4,7 @@ COPY / ./
 RUN yarn --frozen-lockfile --non-interactive install \
     && yarn cache clean
 RUN yarn build \
-    && yarn test
+    && yarn jest
 
 FROM node:15-slim as app
 COPY package.json yarn.lock ./
