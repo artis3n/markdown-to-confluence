@@ -3,8 +3,7 @@ FROM node:15-slim as compiler
 COPY / ./
 RUN yarn --frozen-lockfile --non-interactive install \
     && yarn cache clean
-RUN yarn build \
-    && yarn jest
+RUN yarn build
 
 FROM node:15-slim as app
 COPY package.json yarn.lock ./
