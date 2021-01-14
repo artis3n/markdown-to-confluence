@@ -130,7 +130,7 @@ const convertedMarkdown = convert(content, {
       );
     }
   }
-}
+};
 
 const axios = require("axios").default;
 curlirize(axios, (result, err) => {
