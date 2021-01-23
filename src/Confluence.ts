@@ -23,6 +23,14 @@ export class Confluence {
     this.spaceKey = spaceKey;
   }
 
+  get user(): string {
+    return this.auth.username;
+  }
+
+  toString(): string {
+    return `${this.url}/${this.spaceKey}`;
+  }
+
   postPage(
     content: ConfluencePage
   ): Promise<AxiosResponse<ConfluenceApiPostNewContentData>> {

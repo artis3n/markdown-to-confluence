@@ -25,6 +25,12 @@ export interface ConfluenceApiPostNewContentData {
     history: ConfluenceApiHistory
     version: ConfluenceApiVersion
     container: ConfluenceApiSpace
+    ancestors: Array<ConfluencePageAncestor>
+    macroRenderedOutput: object
+    body: ConfluencePageBody
+    extensions: object
+    _expandable: object
+    _links: object
 }
 
 export interface ConfluenceApiUpdatePageContentData {
@@ -74,15 +80,26 @@ export interface ConfluenceApiError {
     statusCode: StatusCodes
     data: ConfluenceApiErrorData
     message: string
-    reason: ReasonPhrases
+    reason?: ReasonPhrases
 }
 
 export interface ConfluenceApiErrorData {
     authorized: boolean
     valid: boolean
-    allowedInReadOnlyMode: boolean
+    allowedInReadOnlyMode?: boolean
     errors: Array<string>
     successful: boolean
+}
+
+export interface ConfluencePageAncestor {
+    id: string
+    type: string
+    status: string
+    title: string
+    macroRenderedOutput: object
+    extensions: object
+    _expandable: object
+    _links: object
 }
 
 export interface ConfluenceApiSpace {
@@ -90,11 +107,18 @@ export interface ConfluenceApiSpace {
     key: string
     name: string
     type: string
+    status: string
+    _expandable: object
+    _links: object
+    history?: ConfluenceApiHistory
 }
 
 export interface ConfluenceApiHistory {
-    latest: boolean
+    latest?: boolean
     createdDate: string
+    createdBy: object
+    _expandable?: object
+    _links?: object
 }
 
 export interface ConfluencePageHistory extends ConfluenceApiHistory {
@@ -115,7 +139,12 @@ export interface ConfluenceApiVersion {
     message: string
     number: number
     minorEdit: boolean
-    hidden: boolean
+    hidden?: boolean
+    by: object
+    friendlyWhen: string
+    confRev: string
+    _expandable: object
+    _links: object
 }
 
 export interface ConfluencePageVersion extends ConfluenceApiVersion{
@@ -125,6 +154,18 @@ export interface ConfluencePageVersion extends ConfluenceApiVersion{
     number: number
     minorEdit: boolean
     hidden: boolean
+}
+
+export interface ConfluencePageBody {
+    storage: ConfluencePageBodyStorage
+    _expandable: object
+}
+
+export interface ConfluencePageBodyStorage {
+    value: string
+    representation: 'storage'
+    embeddedContent: Array<any>
+    _expandable: object
 }
 
 export type ConfluenceSpaceKey = string

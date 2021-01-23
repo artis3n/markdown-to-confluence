@@ -2,3 +2,5 @@
 node_modules
 dist
 coverage
+.gitsecret/keys/random_seed
+!*.secret
