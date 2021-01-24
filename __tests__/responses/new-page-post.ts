@@ -1,6 +1,6 @@
-import {ConfluenceApiPostNewContentData} from "../../src/types/definitions";
+import {ConfluenceApiNewOrUpdatedContentData} from "../../src/types/definitions";
 
-export const newPagePost: ConfluenceApiPostNewContentData = {
+export const newPagePost: ConfluenceApiNewOrUpdatedContentData = {
   "id": "987654321",
   "type": "page",
   "status": "current",

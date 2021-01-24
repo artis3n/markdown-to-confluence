@@ -16,7 +16,7 @@ export interface ConfluencePage {
     body: string
 }
 
-export interface ConfluenceApiPostNewContentData {
+export interface ConfluenceApiNewOrUpdatedContentData {
     id: string
     type: string
     status: string
@@ -33,30 +33,12 @@ export interface ConfluenceApiPostNewContentData {
     _links: object
 }
 
-export interface ConfluenceApiUpdatePageContentData {
-    id: string
-    type: string
-    status: string
-    title: string
-    space: ConfluenceApiSpace
-    history: ConfluencePageHistory
-    version: ConfluencePageVersion
-    container: ConfluenceApiSpace
-    body: ConfluenceApiUpdatePageContentDataBody
-}
-
-export interface ConfluenceApiUpdatePageContentDataBody {
-    // Will always be 'storage' for our Confluence API calls but is not guaranteed to always be that by Confluence's general API
-    [storageType: string]: {
-        value: string
-    }
-}
-
 export interface ConfluenceApiGetContentResponse {
     results: Array<ConfluenceApiGetContentData>
     start: number
     limit: number
     size: number
+    _links: object
 }
 
 export interface ConfluenceApiGetContentData {
@@ -64,6 +46,10 @@ export interface ConfluenceApiGetContentData {
     type: string
     status: string
     title: string
+    macroRenderedOutput: object
+    extensions: object
+    _expandable: object
+    _links: object
 }
 
 export interface ConfluenceApiGetContentByIdData {
@@ -74,6 +60,10 @@ export interface ConfluenceApiGetContentByIdData {
     space: ConfluenceApiSpace
     history: ConfluencePageHistory
     version: ConfluencePageVersion
+    macroRenderedOutput: object
+    extensions: object
+    _expandable: object
+    _links: object
 }
 
 export interface ConfluenceApiError {
@@ -87,7 +77,12 @@ export interface ConfluenceApiErrorData {
     authorized: boolean
     valid: boolean
     allowedInReadOnlyMode?: boolean
-    errors: Array<string>
+    errors: Array<{
+        message: {
+            translation: string
+            args: Array<string>
+        }
+    }>
     successful: boolean
 }
 
@@ -129,19 +124,29 @@ export interface ConfluencePageHistory extends ConfluenceApiHistory {
 
 export interface ConfluenceCreatedBy {
     type: string
-    username: string
-    userKey: string
+    username?: string
+    userKey?: string
     displayName: string
+    accountId?: string
+    accountType?: string
+    email?: string
+    publicName?: string
+    profilePicture?: object
+    isExternalCollaborator?: boolean
+    _expandable?: object
+    _links?: object
 }
 
 export interface ConfluenceApiVersion {
     when: string
-    message: string
+    message?: string
     number: number
     minorEdit: boolean
     hidden?: boolean
     by: object
     friendlyWhen: string
+    syncRev?: string
+    syncRevSource?: string
     confRev: string
     _expandable: object
     _links: object
@@ -150,10 +155,12 @@ export interface ConfluenceApiVersion {
 export interface ConfluencePageVersion extends ConfluenceApiVersion{
     by: ConfluenceCreatedBy
     when: string
-    message: string
+    message?: string
     number: number
     minorEdit: boolean
-    hidden: boolean
+    hidden?: boolean
+    syncRev: string
+    syncRevSource: string
 }
 
 export interface ConfluencePageBody {
