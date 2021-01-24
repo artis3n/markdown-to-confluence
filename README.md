@@ -1,6 +1,7 @@
 # Markdown-to-Confluence
 
 [![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/artis3n/markdown-to-confluence)](https://github.com/artis3n/markdown-to-confluence/releases)
+![Test the Action](https://github.com/artis3n/markdown-to-confluence/workflows/Test%20the%20Action/badge.svg)
 [![codecov](https://codecov.io/gh/artis3n/markdown-to-confluence/branch/main/graph/badge.svg?token=QG119OQ2WD)](https://codecov.io/gh/artis3n/markdown-to-confluence)
 ![GitHub last commit](https://img.shields.io/github/last-commit/artis3n/markdown-to-confluence)
 ![GitHub](https://img.shields.io/github/license/artis3n/markdown-to-confluence)
