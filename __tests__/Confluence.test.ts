@@ -16,18 +16,18 @@ import {
   ConfluenceApiError,
   ConfluenceApiGetContentByIdData,
 } from "../src/types/definitions";
-// @ts-ignore
 import {
   getContentSearchByTitle,
   noFoundResults,
+  // @ts-ignore
 } from "./responses/get-content-search";
 // @ts-ignore
 import { errorFromId, getPageById } from "./responses/get-content-by-id";
-// @ts-ignore
 import {
   errorExistingVersion,
   errorPageIdNotFound,
   updatePageById,
+  // @ts-ignore
 } from "./responses/update-content-by-id";
 
 describe("Confluence", () => {
