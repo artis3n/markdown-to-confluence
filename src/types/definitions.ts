@@ -16,7 +16,7 @@ export interface ConfluencePage {
     body: string
 }
 
-export interface ConfluenceApiPostNewContentData {
+export interface ConfluenceApiNewOrUpdatedContentData {
     id: string
     type: string
     status: string
@@ -25,25 +25,12 @@ export interface ConfluenceApiPostNewContentData {
     history: ConfluenceApiHistory
     version: ConfluenceApiVersion
     container: ConfluenceApiSpace
-}
-
-export interface ConfluenceApiUpdatePageContentData {
-    id: string
-    type: string
-    status: string
-    title: string
-    space: ConfluenceApiSpace
-    history: ConfluencePageHistory
-    version: ConfluencePageVersion
-    container: ConfluenceApiSpace
-    body: ConfluenceApiUpdatePageContentDataBody
-}
-
-export interface ConfluenceApiUpdatePageContentDataBody {
-    // Will always be 'storage' for our Confluence API calls but is not guaranteed to always be that by Confluence's general API
-    [storageType: string]: {
-        value: string
-    }
+    ancestors: Array<ConfluencePageAncestor>
+    macroRenderedOutput: object
+    body: ConfluencePageBody
+    extensions: object
+    _expandable: object
+    _links: object
 }
 
 export interface ConfluenceApiGetContentResponse {
@@ -51,6 +38,7 @@ export interface ConfluenceApiGetContentResponse {
     start: number
     limit: number
     size: number
+    _links: object
 }
 
 export interface ConfluenceApiGetContentData {
@@ -58,6 +46,10 @@ export interface ConfluenceApiGetContentData {
     type: string
     status: string
     title: string
+    macroRenderedOutput: object
+    extensions: object
+    _expandable: object
+    _links: object
 }
 
 export interface ConfluenceApiGetContentByIdData {
@@ -68,21 +60,41 @@ export interface ConfluenceApiGetContentByIdData {
     space: ConfluenceApiSpace
     history: ConfluencePageHistory
     version: ConfluencePageVersion
+    macroRenderedOutput: object
+    extensions: object
+    _expandable: object
+    _links: object
 }
 
 export interface ConfluenceApiError {
     statusCode: StatusCodes
     data: ConfluenceApiErrorData
     message: string
-    reason: ReasonPhrases
+    reason?: ReasonPhrases
 }
 
 export interface ConfluenceApiErrorData {
     authorized: boolean
     valid: boolean
-    allowedInReadOnlyMode: boolean
-    errors: Array<string>
+    allowedInReadOnlyMode?: boolean
+    errors: Array<{
+        message: {
+            translation: string
+            args: Array<string>
+        }
+    }>
     successful: boolean
+}
+
+export interface ConfluencePageAncestor {
+    id: string
+    type: string
+    status: string
+    title: string
+    macroRenderedOutput: object
+    extensions: object
+    _expandable: object
+    _links: object
 }
 
 export interface ConfluenceApiSpace {
@@ -90,11 +102,18 @@ export interface ConfluenceApiSpace {
     key: string
     name: string
     type: string
+    status: string
+    _expandable: object
+    _links: object
+    history?: ConfluenceApiHistory
 }
 
 export interface ConfluenceApiHistory {
-    latest: boolean
+    latest?: boolean
     createdDate: string
+    createdBy: object
+    _expandable?: object
+    _links?: object
 }
 
 export interface ConfluencePageHistory extends ConfluenceApiHistory {
@@ -105,26 +124,55 @@ export interface ConfluencePageHistory extends ConfluenceApiHistory {
 
 export interface ConfluenceCreatedBy {
     type: string
-    username: string
-    userKey: string
+    username?: string
+    userKey?: string
     displayName: string
+    accountId?: string
+    accountType?: string
+    email?: string
+    publicName?: string
+    profilePicture?: object
+    isExternalCollaborator?: boolean
+    _expandable?: object
+    _links?: object
 }
 
 export interface ConfluenceApiVersion {
     when: string
-    message: string
+    message?: string
     number: number
     minorEdit: boolean
-    hidden: boolean
+    hidden?: boolean
+    by: object
+    friendlyWhen: string
+    syncRev?: string
+    syncRevSource?: string
+    confRev: string
+    _expandable: object
+    _links: object
 }
 
 export interface ConfluencePageVersion extends ConfluenceApiVersion{
     by: ConfluenceCreatedBy
     when: string
-    message: string
+    message?: string
     number: number
     minorEdit: boolean
-    hidden: boolean
+    hidden?: boolean
+    syncRev: string
+    syncRevSource: string
+}
+
+export interface ConfluencePageBody {
+    storage: ConfluencePageBodyStorage
+    _expandable: object
+}
+
+export interface ConfluencePageBodyStorage {
+    value: string
+    representation: 'storage'
+    embeddedContent: Array<any>
+    _expandable: object
 }
 
 export type ConfluenceSpaceKey = string

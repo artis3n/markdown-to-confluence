@@ -1,7 +1,7 @@
 import {
   ConfluenceApiGetContentByIdData,
   ConfluenceApiGetContentResponse,
-  ConfluenceApiPostNewContentData,
+  ConfluenceApiNewOrUpdatedContentData,
   ConfluenceAuth,
   ConfluencePage,
   ConfluenceSpaceKey,
@@ -23,9 +23,17 @@ export class Confluence {
     this.spaceKey = spaceKey;
   }
 
+  get user(): string {
+    return this.auth.username;
+  }
+
+  toString(): string {
+    return `${this.url}/${this.spaceKey}`;
+  }
+
   postPage(
     content: ConfluencePage
-  ): Promise<AxiosResponse<ConfluenceApiPostNewContentData>> {
+  ): Promise<AxiosResponse<ConfluenceApiNewOrUpdatedContentData>> {
     return axios({
       method: "post",
       url: `${this.url}/rest/api/content`,
@@ -54,7 +62,7 @@ export class Confluence {
   updateExistingPage(
     metadata: ConfluenceApiGetContentByIdData,
     page: ConfluencePage
-  ): Promise<AxiosResponse> {
+  ): Promise<AxiosResponse<ConfluenceApiNewOrUpdatedContentData>> {
     return axios({
       method: "put",
       url: `${this.url}/rest/api/content/${metadata.id}`,
@@ -100,7 +108,9 @@ export class Confluence {
     });
   }
 
-  getPageMetadataById(id: string): Promise<AxiosResponse> {
+  getPageMetadataById(
+    id: string
+  ): Promise<AxiosResponse<ConfluenceApiGetContentByIdData>> {
     return axios({
       method: "get",
       url: `${this.url}/rest/api/content/${id}`,

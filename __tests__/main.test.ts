@@ -7,7 +7,7 @@ jest.mock("@actions/github");
 jest.mock("../src/markdownProcessor");
 jest.mock("../src/Confluence");
 
-describe("Stub test", () => {
+describe("main", () => {
   it("Stub test", () => {
     expect(true);
   });

@@ -1,6 +1,6 @@
 ---
-name: Publish Markdown on Confluence
-description: Recursively converts markdown files in a GitHub project into a series of pages and sub-pages on Confluence
+name: Publish Markdown to Confluence
+description: Recursively converts markdown files in a GitHub project into a series of pages and sub-pages on Confluence.
 author: Ari Kalfus <dev@artis3nal.com>
 inputs:
   confluence_url:
@@ -11,10 +11,12 @@ inputs:
 
       NOTE the /wiki in the URL. For Confluence Cloud, you must specify this, or the alternative URI at which your Confluence instance resides.
 
-      For Confluence Server, this is https://<your hostname>:8090.
+      For Confluence Server, this is by default https://<your hostname>:8090.
 
       NOTE that you should modify this hostname as appropriate for your Server instance.
       For example, it is unlikely that you are directly accessing port 8090, and are instead proxied through 80 or 443, which only requires http:// or https://.
+
+      e.g. https://wiki.mycompany.com
     required: true
   space_key:
     description: |
