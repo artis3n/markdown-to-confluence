@@ -108,7 +108,9 @@ export class Confluence {
     });
   }
 
-  getPageMetadataById(id: string): Promise<AxiosResponse<ConfluenceApiGetContentByIdData>> {
+  getPageMetadataById(
+    id: string
+  ): Promise<AxiosResponse<ConfluenceApiGetContentByIdData>> {
     return axios({
       method: "get",
       url: `${this.url}/rest/api/content/${id}`,
