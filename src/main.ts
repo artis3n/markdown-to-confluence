@@ -12,7 +12,7 @@ import {
 } from "./types/definitions";
 import { StatusCodes } from "http-status-codes";
 
-const main = async () => {
+export const main = async () => {
   let confluenceUrl = getInput("confluence_url");
   if (confluenceUrl === "") {
     throw new Error(
@@ -35,9 +35,14 @@ const main = async () => {
     username: getInput("username"),
     password: getInput("password"),
   };
-  if (auth.username === "" || auth.password === "") {
+  if (auth.username == "") {
     throw new Error(
-      "'username' or 'password' input parameters are not defined. You must specify a Confluence user and a corresponding API token or password."
+      "'username' input parameter is not defined. You must specify a Confluence user."
+    );
+  }
+  if (auth.password == "") {
+    throw new Error(
+      "'password' input parameter is not defined. You must specify a Confluence API token or password."
     );
   }
 
