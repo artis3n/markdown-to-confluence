@@ -1,11 +1,11 @@
-FROM node:15-slim as compiler
+FROM node:16-slim as compiler
 
 COPY / ./
 RUN yarn --frozen-lockfile --non-interactive install \
     && yarn cache clean
 RUN yarn build
 
-FROM node:15-slim as app
+FROM node:16-slim as app
 COPY package.json yarn.lock ./
 COPY --from=compiler dist ./
 
