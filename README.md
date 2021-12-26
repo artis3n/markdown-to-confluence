@@ -2,7 +2,7 @@
 
 [![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/artis3n/markdown-to-confluence)](https://github.com/artis3n/markdown-to-confluence/releases)
 [![CI suite](https://github.com/artis3n/markdown-to-confluence/actions/workflows/pr.yml/badge.svg)](https://github.com/artis3n/markdown-to-confluence/actions/workflows/pr.yml)
-[![codecov](https://codecov.io/gh/artis3n/markdown-to-confluence/branch/main/graph/badge.svg?token=QG119OQ2WD)](https://codecov.io/gh/artis3n/markdown-to-confluence)
+[![codecov](https://codecov.io/gh/artis3n/markdown-to-confluence/branch/main/graph/badge.svg?token=DBS54ADM8U)](https://codecov.io/gh/artis3n/markdown-to-confluence)
 ![GitHub last commit](https://img.shields.io/github/last-commit/artis3n/markdown-to-confluence)
 ![GitHub](https://img.shields.io/github/license/artis3n/markdown-to-confluence)
 [![GitHub followers](https://img.shields.io/github/followers/artis3n?style=social)](https://github.com/artis3n/)

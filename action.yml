@@ -33,7 +33,7 @@ inputs:
     required: true
   password:
     description: |
-      The API token or password with which to authenticate to Confluence.
+      The API token or password with which to authenticate to Confluence with [Basic Auth](https://developer.atlassian.com/cloud/confluence/basic-auth-for-rest-apis/).
 
       For Confluence Cloud, you can generate an API token at https://id.atlassian.com/manage/api-tokens.
     required: true
