@@ -141,7 +141,7 @@ const convertedMarkdown = convert(content, {
   }
 };
 
-const axios = require("axios").default;
+import axios from "axios";
 curlirize(axios, (result, err) => {
   const { command } = result;
   if (err) {
