@@ -6,6 +6,7 @@ RUN yarn --frozen-lockfile --non-interactive install \
 RUN yarn build
 
 FROM node:16-slim as app
+
 COPY package.json yarn.lock ./
 COPY --from=compiler dist ./
 
