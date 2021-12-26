@@ -5,6 +5,7 @@ import { context as githubContext } from "@actions/github";
 import { convertToConfluenceWiki } from "./markdownProcessor";
 import { Confluence } from "./Confluence";
 import {
+  ConfluenceApiError,
   ConfluenceApiGetContentByIdData,
   ConfluenceApiGetContentResponse,
   ConfluenceAuth,
@@ -85,14 +86,12 @@ const convertedMarkdown = convert(content, {
     await confluence.postPage(page);
     info("Wrote page successfully");
   } catch (err: any) {
-    // It isn't AxiosError<ConfluenceApiNewOrUpdatedContentData> because it's an error. What type would this be?
+    const firstPostAttemptError: AxiosError<ConfluenceApiError> = err;
     debug(
-      `${(err as AxiosError).response?.data.reason} : ${
-        err.response?.data.message
-      }`
+      `${firstPostAttemptError.response?.data.reason} : ${firstPostAttemptError.response?.data.message}`
     );
     if (
-      (err as AxiosError).response?.data.message.includes(
+      firstPostAttemptError.response?.data.message.includes(
         "A page with this title already exists"
       )
     ) {
@@ -110,10 +109,9 @@ const convertedMarkdown = convert(content, {
           info("Successfully converted repo into Confluence wiki");
         }
       } catch (err: any) {
+        const updatePageContentsError: AxiosError<ConfluenceApiError> = err;
         error(
-          `${(err as AxiosError).response?.status}: ${
-            err.response?.statusText
-          }, ${err.response?.data} : ${err.request.path}`
+          `${updatePageContentsError.response?.status}: ${updatePageContentsError.response?.statusText}, ${updatePageContentsError.response?.data} : ${updatePageContentsError.request.path}`
         );
         setFailed(
           `Error occurred attempting to update Confluence on page: ${page.title}`
@@ -121,12 +119,10 @@ const convertedMarkdown = convert(content, {
       }
     } else {
       error(
-        `${(err as AxiosError).response?.status} : ${
-          (err as AxiosError).response?.data.message
-        }`
+        `${firstPostAttemptError.response?.status} : ${firstPostAttemptError.response?.data.message}`
       );
       if (
-        (err as AxiosError).response?.data?.message.includes(
+        firstPostAttemptError.response?.data?.message.includes(
           "Could not create content with type page"
         )
       ) {
