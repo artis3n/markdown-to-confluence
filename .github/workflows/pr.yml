@@ -18,8 +18,8 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v2.5.0
         with:
-          node-version: '16.x'
-          cache: 'yarn'
+          node-version: "16.x"
+          cache: "yarn"
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
@@ -31,9 +31,7 @@ jobs:
         run: yarn test
 
       - name: Report coverage
-        run: yarn coverage
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        uses: codecov/codecov-action@v2
 
   wiki:
     runs-on: ubuntu-latest
@@ -45,6 +43,6 @@ jobs:
         uses: ./
         with:
           confluence_url: https://github-action-artis3n.atlassian.net/wiki
-          space_key: GAE  # Github Action Example
+          space_key: GAE # Github Action Example
           username: ${{ secrets.CONFLUENCE_USER }}
           password: ${{ secrets.CONFLUENCE_APIKEY }}

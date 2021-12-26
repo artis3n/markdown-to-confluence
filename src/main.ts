@@ -1,4 +1,4 @@
-import { AxiosResponse } from "axios";
+import { AxiosResponse, AxiosError } from "axios";
 import curlirize from "axios-curlirize";
 import { debug, error, getInput, info, setFailed } from "@actions/core";
 import { context as githubContext } from "@actions/github";
@@ -84,21 +84,24 @@ const convertedMarkdown = convert(content, {
   try {
     await confluence.postPage(page);
     info("Wrote page successfully");
-  } catch (err) {
-    debug(`${err.response?.data.reason} : ${err.response?.data.message}`);
+  } catch (err: any) {
+    // It isn't AxiosError<ConfluenceApiNewOrUpdatedContentData> because it's an error. What type would this be?
+    debug(
+      `${(err as AxiosError).response?.data.reason} : ${
+        err.response?.data.message
+      }`
+    );
     if (
-      err.response?.data.message.includes(
+      (err as AxiosError).response?.data.message.includes(
         "A page with this title already exists"
       )
     ) {
       try {
-        const foundPageResponse: AxiosResponse<ConfluenceApiGetContentResponse> = await confluence.findPageByTitle(
-          page.title
-        );
+        const foundPageResponse: AxiosResponse<ConfluenceApiGetContentResponse> =
+          await confluence.findPageByTitle(page.title);
         const foundPage = foundPageResponse.data.results[0];
-        const pageMetadataResponse: AxiosResponse<ConfluenceApiGetContentByIdData> = await confluence.getPageMetadataById(
-          foundPage.id
-        );
+        const pageMetadataResponse: AxiosResponse<ConfluenceApiGetContentByIdData> =
+          await confluence.getPageMetadataById(foundPage.id);
         const response = await confluence.updateExistingPage(
           pageMetadataResponse.data,
           page
@@ -106,18 +109,24 @@ const convertedMarkdown = convert(content, {
         if (response.status === StatusCodes.OK) {
           info("Successfully converted repo into Confluence wiki");
         }
-      } catch (err) {
+      } catch (err: any) {
         error(
-          `${err.response?.status}: ${err.response?.statusText}, ${err.response?.data} : ${err.request.path}`
+          `${(err as AxiosError).response?.status}: ${
+            err.response?.statusText
+          }, ${err.response?.data} : ${err.request.path}`
         );
         setFailed(
           `Error occurred attempting to update Confluence on page: ${page.title}`
         );
       }
     } else {
-      error(`${err.response.status} : ${err.response?.data.message}`);
+      error(
+        `${(err as AxiosError).response?.status} : ${
+          (err as AxiosError).response?.data.message
+        }`
+      );
       if (
-        err.response?.data?.message.includes(
+        (err as AxiosError).response?.data?.message.includes(
           "Could not create content with type page"
         )
       ) {

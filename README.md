@@ -1,7 +1,7 @@
 # Markdown-to-Confluence
 
 [![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/artis3n/markdown-to-confluence)](https://github.com/artis3n/markdown-to-confluence/releases)
-![Test the Action](https://github.com/artis3n/markdown-to-confluence/workflows/Test%20the%20Action/badge.svg)
+[![CI suite](https://github.com/artis3n/markdown-to-confluence/actions/workflows/pr.yml/badge.svg)](https://github.com/artis3n/markdown-to-confluence/actions/workflows/pr.yml)
 [![codecov](https://codecov.io/gh/artis3n/markdown-to-confluence/branch/main/graph/badge.svg?token=QG119OQ2WD)](https://codecov.io/gh/artis3n/markdown-to-confluence)
 ![GitHub last commit](https://img.shields.io/github/last-commit/artis3n/markdown-to-confluence)
 ![GitHub](https://img.shields.io/github/license/artis3n/markdown-to-confluence)
@@ -18,7 +18,7 @@ The Action will use the README.md of the repository as the root page titled with
 The `source_dir` is a relative path inside the repository to the location of the Markdown files that you wish to render in Confluence.
 See below for more details and how to configure this action.
 
-See the output of this action from the [CI workflow](/.github/workflows/pr.yml) at <https://artis3nal.atlassian.net/wiki/spaces/GAT/>.
+See the output of this action from the [CI workflow](/.github/workflows/pr.yml) at <https://github-action-artis3n.atlassian.net/wiki/x/coAB>.
 
 # Usage
 

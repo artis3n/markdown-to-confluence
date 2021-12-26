@@ -52,7 +52,7 @@ inputs:
 
       Defaults to the repo root.
     required: false
-    default: './'
+    default: "./"
   code_theme:
     description: |
       What Confluence code theme to apply to code blocks. Must be a valid Confluence code block theme.
@@ -61,7 +61,7 @@ inputs:
 
       Default: Confluence
     required: false
-    default: 'Confluence'
+    default: "Confluence"
   code_line_numbers:
     description: |
       Whether to include line numbers in code blocks.
@@ -70,7 +70,7 @@ inputs:
 
       Default: true
     required: false
-    default: 'true'
+    default: "true"
 runs:
   using: docker
   image: Dockerfile
