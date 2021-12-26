@@ -1,11 +1,11 @@
-FROM node:16-slim as compiler
+FROM node:17-slim as compiler
 
 COPY / ./
 RUN yarn --frozen-lockfile --non-interactive install \
     && yarn cache clean
 RUN yarn build
 
-FROM node:16-slim as app
+FROM node:17-slim as app
 
 RUN mkdir /app
 
