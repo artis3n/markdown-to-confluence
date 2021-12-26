@@ -1,9 +1,22 @@
 version: 2
 updates:
   - package-ecosystem: github-actions
-    directory: '/'
+    directory: "/"
     schedule:
-      interval: daily
+      interval: monthly
+    reviewers:
+      - artis3n
+    assignees:
+      - artis3n
+    commit-message:
+      prefix: fix
+      prefix-development: chore
+      include: scope
+
+  - package-ecosystem: npm
+    directory: "/"
+    schedule:
+      interval: monthly
     reviewers:
       - artis3n
     assignees:
@@ -14,9 +27,9 @@ updates:
       include: scope
 
   - package-ecosystem: docker
-    directory: '/'
+    directory: "/"
     schedule:
-      interval: weekly
+      interval: monthly
     reviewers:
       - artis3n
     assignees:

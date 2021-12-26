@@ -1,10 +1,7 @@
-import { convert } from "@rayzr/markdown2confluence";
-import { MarkupConversionOptions } from "./types/definitions";
+import { convert } from '@rayzr/markdown2confluence'
+import { MarkupConversionOptions } from './types/definitions'
 
-export const convertToConfluenceWiki = (
-  content: string,
-  opts: MarkupConversionOptions
-): string => {
+export const convertToConfluenceWiki = (content: string, opts: MarkupConversionOptions): string => {
   return convert(content, {
     codeStyling: {
       linenumbers: opts.codeLineNumbers,
@@ -16,5 +13,5 @@ export const convertToConfluenceWiki = (
       baseUrl: opts.baseUrl,
       smartLists: true,
     },
-  });
-};
+  })
+}

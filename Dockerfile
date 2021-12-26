@@ -7,10 +7,14 @@ RUN yarn build
 
 FROM node:16-slim as app
 
-COPY package.json yarn.lock ./
-COPY --from=compiler dist ./
+RUN mkdir /app
+
+COPY package.json yarn.lock /app/
+COPY --from=compiler dist /app/
+
+WORKDIR /app
 
 RUN yarn --production --frozen-lockfile --non-interactive install \
     && yarn cache clean
 
-ENTRYPOINT ["node", "/main.js"]
+ENTRYPOINT ["node", "/app/main.js"]

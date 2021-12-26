@@ -33,7 +33,7 @@ inputs:
     required: true
   password:
     description: |
-      The API token or password with which to authenticate to Confluence.
+      The API token or password with which to authenticate to Confluence with [Basic Auth](https://developer.atlassian.com/cloud/confluence/basic-auth-for-rest-apis/).
 
       For Confluence Cloud, you can generate an API token at https://id.atlassian.com/manage/api-tokens.
     required: true
@@ -52,7 +52,7 @@ inputs:
 
       Defaults to the repo root.
     required: false
-    default: './'
+    default: "./"
   code_theme:
     description: |
       What Confluence code theme to apply to code blocks. Must be a valid Confluence code block theme.
@@ -61,7 +61,7 @@ inputs:
 
       Default: Confluence
     required: false
-    default: 'Confluence'
+    default: "Confluence"
   code_line_numbers:
     description: |
       Whether to include line numbers in code blocks.
@@ -70,7 +70,7 @@ inputs:
 
       Default: true
     required: false
-    default: 'true'
+    default: "true"
 runs:
   using: docker
   image: Dockerfile
