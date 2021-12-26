@@ -5,41 +5,35 @@ import {
   ConfluenceAuth,
   ConfluencePage,
   ConfluenceSpaceKey,
-} from "./types/definitions";
-import axios, { AxiosResponse } from "axios";
+} from './types/definitions'
+import axios, { AxiosResponse } from 'axios'
 
 export class Confluence {
-  private readonly url: string;
-  private readonly auth: ConfluenceAuth;
-  private readonly spaceKey: ConfluenceSpaceKey;
+  private readonly url: string
+  private readonly auth: ConfluenceAuth
+  private readonly spaceKey: ConfluenceSpaceKey
 
-  constructor(
-    confluenceUrl: string,
-    auth: ConfluenceAuth,
-    spaceKey: ConfluenceSpaceKey
-  ) {
-    this.url = confluenceUrl;
-    this.auth = auth;
-    this.spaceKey = spaceKey;
+  constructor(confluenceUrl: string, auth: ConfluenceAuth, spaceKey: ConfluenceSpaceKey) {
+    this.url = confluenceUrl
+    this.auth = auth
+    this.spaceKey = spaceKey
   }
 
   get user(): string {
-    return this.auth.username;
+    return this.auth.username
   }
 
   toString(): string {
-    return `${this.url}/${this.spaceKey}`;
+    return `${this.url}/${this.spaceKey}`
   }
 
-  postPage(
-    content: ConfluencePage
-  ): Promise<AxiosResponse<ConfluenceApiNewOrUpdatedContentData>> {
+  postPage(content: ConfluencePage): Promise<AxiosResponse<ConfluenceApiNewOrUpdatedContentData>> {
     return axios({
-      method: "post",
+      method: 'post',
       url: `${this.url}/rest/api/content`,
       headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
       },
       auth: this.auth,
       data: {
@@ -47,16 +41,16 @@ export class Confluence {
           key: this.spaceKey,
         },
         title: content.title,
-        type: "page",
-        status: "current",
+        type: 'page',
+        status: 'current',
         body: {
           wiki: {
             value: content.body,
-            representation: "wiki",
+            representation: 'wiki',
           },
         },
       },
-    });
+    })
   }
 
   updateExistingPage(
@@ -64,11 +58,11 @@ export class Confluence {
     page: ConfluencePage
   ): Promise<AxiosResponse<ConfluenceApiNewOrUpdatedContentData>> {
     return axios({
-      method: "put",
+      method: 'put',
       url: `${this.url}/rest/api/content/${metadata.id}`,
       headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
       },
       auth: this.auth,
       data: {
@@ -76,52 +70,48 @@ export class Confluence {
           number: metadata.version.number + 1,
         },
         title: page.title,
-        type: "page",
-        status: "current",
+        type: 'page',
+        status: 'current',
         body: {
           wiki: {
             value: page.body,
-            representation: "wiki",
+            representation: 'wiki',
           },
         },
       },
-    });
+    })
   }
 
-  findPageByTitle(
-    title: string
-  ): Promise<AxiosResponse<ConfluenceApiGetContentResponse>> {
+  findPageByTitle(title: string): Promise<AxiosResponse<ConfluenceApiGetContentResponse>> {
     return axios({
-      method: "get",
+      method: 'get',
       url: `${this.url}/rest/api/content`,
       headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
       },
       auth: this.auth,
       params: {
         spaceKey: this.spaceKey,
         title: title,
-        type: "page",
-        status: "current",
+        type: 'page',
+        status: 'current',
       },
-    });
+    })
   }
 
-  getPageMetadataById(
-    id: string
-  ): Promise<AxiosResponse<ConfluenceApiGetContentByIdData>> {
+  getPageMetadataById(id: string): Promise<AxiosResponse<ConfluenceApiGetContentByIdData>> {
     return axios({
-      method: "get",
+      method: 'get',
       url: `${this.url}/rest/api/content/${id}`,
       headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
       },
       auth: this.auth,
       params: {
-        status: "current",
+        status: 'current',
       },
-    });
+    })
   }
 }
